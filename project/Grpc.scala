@@ -1,4 +1,3 @@
-import com.typesafe.sbt.SbtScalariform.ScalariformKeys
 import sbt._
 import sbt.Keys._
 import sbtassembly.AssemblyKeys._
@@ -83,8 +82,6 @@ object Grpc extends Base {
         Seq(s"--io.buoyant.grpc_out=plugins=grpc:${ss.getCanonicalPath}")
       }
     )) ++ Seq(
-      // Sbt has trouble if scalariform rewrites the generated code
-      excludeFilter in ScalariformKeys.format := "*.pb.scala",
       coverageExcludedFiles := """.*\.pb\.scala""",
 
       // We don't need protobuf-java.

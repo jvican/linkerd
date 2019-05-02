@@ -1,4 +1,3 @@
-import com.typesafe.sbt.SbtScalariform.{scalariformSettings => baseScalariformSettings, _}
 import sbt._
 import sbt.Keys._
 import complete.Parsers.spaceDelimited
@@ -9,7 +8,6 @@ import sbtdocker._
 import sbtdocker.DockerKeys._
 import sbtdocker.DockerSettings.baseDockerSettings
 import scala.language.implicitConversions
-import scalariform.formatter.preferences._
 import scoverage.ScoverageKeys._
 import scoverage.ScoverageSbtPlugin
 
@@ -122,14 +120,6 @@ class Base extends Build {
     publishArtifact := false
   )
 
-  val scalariformSettings = baseScalariformSettings ++ Seq(
-    ScalariformKeys.preferences := ScalariformKeys.preferences.value
-      .setPreference(DoubleIndentClassDeclaration, false)
-      .setPreference(PreserveSpaceBeforeArguments, false)
-      .setPreference(SpacesAroundMultiImports,     false)
-      .setPreference(SpacesWithinPatternBinders,   false)
-  )
-
   val EndToEndTest =
     config("e2e") extend Test
 
@@ -211,7 +201,6 @@ class Base extends Build {
   def project(id: String, dir: File): Project = Project(id, dir)
     .settings(name := id)
     .settings(baseSettings)
-    .settings(scalariformSettings)
 
   /**
    * Test utilities (mostly for dealing with async APIs)
