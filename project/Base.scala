@@ -51,6 +51,7 @@ class Base extends Build {
           case _ => s"$headVersion-SNAPSHOT"
         }
       }
+      headVersion + "-bloop"
     }
     val revision = {
       if (noGit) ""
